@@ -2,7 +2,7 @@ import Image from 'next/image';
 import {CgMenuLeft} from 'react-icons/cg';
 import { useState } from "react";
 import { HiHome} from 'react-icons/hi';
-import {BsGearFill, BsPersonCircle} from 'react-icons/bs';
+import {BsGearFill, BsPersonCircle,BsSearch} from 'react-icons/bs';
 import {BiExit} from 'react-icons/bi';
 import {FiMenu} from 'react-icons/fi';
 import {GoGraph} from 'react-icons/go';
@@ -45,9 +45,11 @@ const Layout = ( props ) => {
                     <div className="fixed inset-0 min-h-screen bg-[#202020] bg-opacity-30 z-10" >
                     <div className="fixed right-0 h-screen w-[16.875rem]  bg-[#FAFAFA] z-20 overflow-hidden">
                         <div className="absolute  h-[35rem] w-[35rem]  bg-[#1BE56C] bg-cover rounded-full top-[-18.375rem] left-[-8.938rem]">
-                            <div className="absolute ml-[13rem] mt-[23rem] ">
+                            <div className=" ml-[13rem] mt-[20rem] ">
                                 <Image src="/perfil-example.jpg" alt="profile" width={150} height={150} className="rounded-full" />
+                                <div className='ml-[24px] font-bold' >{'@' + JSON.parse(localStorage.getItem('currentUser')).username}</div>
                             </div>
+                 
                         </div>
 
                         <div className={`w-[16.875rem] h-[3.563rem] mt-[18.688rem] cursor-pointer ${position === "general"?selected:""}`} onClick={() =>{if(position !== "general"){navigate("/general")}}}>
@@ -66,6 +68,13 @@ const Layout = ( props ) => {
                             </div>
                         </div>
 
+                        <div className={`w-[16.875rem] h-[3.563rem] cursor-pointer ${position === "searchPage"?selected:""}`} onClick={() =>{if(position !== "searchPage"){navigate("/searchPage")}}}>
+                            <div className="flex">
+                                <BsSearch className="ml-[1.5rem] mt-[1.063rem] h-[1.5rem] w-[1.5rem] text-[#1BE56C]" />
+                                <div className="ml-[1rem] mt-[1.188rem] font-semibold text-[1rem]"> Search  </div>
+                            </div>
+                        </div>
+
                         <div className=" w-[16.875rem] h-[3.563rem] cursor-pointer">
                             <div className="flex" onClick={() => {setIsReferalCode(!isReferalCode)}}>
                                 <BiExit className="ml-[1.5rem] mt-[1.063rem] h-[1.5rem] w-[1.5rem] text-[#1BE56C]" />
@@ -77,7 +86,7 @@ const Layout = ( props ) => {
                                
                                 <div className="ml-[2rem] mt-[1.188rem] font-semibold text-[1rem] 
                                 bg-black text-white pl-[16px] pr-[16px] rounded-[16px] "> 
-                                {JSON.parse(localStorage.getItem('user')).referalCode} </div>
+                                {JSON.parse(localStorage.getItem('currentUser')).referalCode} </div>
                             </div>
                         </div>
                            } 

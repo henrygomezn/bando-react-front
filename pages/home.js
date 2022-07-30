@@ -55,7 +55,7 @@ export default function home() {
                     .then(response => {
                         resolve(response);
                         console.log(response)
-                        localStorage.setItem('user', JSON.stringify(response.data))
+                        localStorage.setItem('user_id', JSON.stringify(response.data.id))
                         setSaveForm(true);
                         alert("Sign in successfully!")
                         navigate("/general")

@@ -3,7 +3,6 @@ import { RiCloseFill } from 'react-icons/ri'
 import { BsCheck } from 'react-icons/bs'
 import { Dialog, Transition } from '@headlessui/react'
 import { useForm } from 'react-hook-form'
-import HwSwitch from '../HwSwitch'
 import axios from "axios";
 import { useRouter } from "next/router";
 
