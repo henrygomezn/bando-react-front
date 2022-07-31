@@ -82,9 +82,23 @@ export default function home() {
 
     return (
 
-        <>
-  <div className="flex items-end justify-center min-h-screen  bg-[#000000]">
+        <div className=' min-h-screen bg-[#000000]'>
+   
+          <div className="bg-[#1BE56C] bg-cover h-[80px] flex flex-inline">
+                <div className="flex justify-start ml-[24px]">
+                    <Image src="/bando-logo.png"  alt="Bando logo" width={80} height={60} />
+                </div>
+                <div className='flex flex-auto justify-end text-black items-center mr-[24px]'>
+                        <div className='ml-[auto] mr-[auto]'> <Image src="/bando-text.png" alt="Bando logo" width={120} height={80} /></div>
+
+                    </div>
+                </div>
+
+              <div className="flex items-end justify-center">
        
+
+
+
                         <div className="inline-block w-[327px] h-[500px] align-bottom pt-[5vh] pb-[5vh] bg-[#1BE56C] text-left overflow-hidden shadow-xl transform transition-all my-[5rem] m:my-[10rem] rounded-[1.875rem]">
                             {/*Header modal */}
                             <div className=" justify-end">
@@ -158,7 +172,7 @@ export default function home() {
                         </div>
                  
                 </div>
-        </>
+        </div>
 
     )
 }

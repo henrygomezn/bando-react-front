@@ -45,8 +45,8 @@ export default function Profile() {
 
 
                     <div className='ml-[16px]'>
-                        <div className='w-[40px] h-[40px]'>
-                            <Image src="/perfil-example.jpg" alt="profile" height={40} width={40} className="rounded-full w-[40px] h-[40px]" />
+                        <div className='w-[50px] h-[50px]'>
+                        <img src={JSON.parse(localStorage.getItem('currentUser')).imgAvatarBase64} className="rounded-full"  />
                         </div>
                     </div>
 
@@ -81,7 +81,7 @@ export default function Profile() {
                     {JSON.parse(localStorage.getItem('currentUser')).posts && JSON.parse(localStorage.getItem('currentUser')).posts.length > 0 && JSON.parse(localStorage.getItem('currentUser')).posts.map((item) =>
                         <div className='flex ml-[1rem]'>
                             <div className='w-[40px] h-[40px]'>
-                                <Image src="/perfil-example.jpg" alt="profile" width={40} height={40} className=" rounded-full" />
+                            <img src={JSON.parse(localStorage.getItem('currentUser')).imgAvatarBase64} className="rounded-full"  />
                             </div>
 
                             <div className='bg-[white] rounded-[16px] mb-[11px] leading-[18px] tracking-[-2%] ml-[8px] w-[90%] pt-[8px] pb-[8px] mr-[16px]'>

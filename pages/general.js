@@ -2,16 +2,12 @@ import Layout from '../components/Layout/Layout'
 import Image from 'next/image';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { Bars } from 'react-loader-spinner';
 import { useForm } from 'react-hook-form'
 import { BsCamera } from 'react-icons/bs';
 import { AiFillLike } from 'react-icons/ai';
 import { MdModeComment } from 'react-icons/md';
-import { data } from 'autoprefixer';
-import { Fragment } from 'react/cjs/react.production.min';
 import { useRouter } from "next/router";
 import { RiSendPlaneFill } from 'react-icons/ri';
-
 
 
 export default function General() {
@@ -21,8 +17,10 @@ export default function General() {
   const [loading, setLoading] = useState(true);
   const { register, handleSubmit, formState: { errors }, clearErrors, reset } = useForm();
   const [saveForm, setSaveForm] = useState(true)
+  const [flagChange, setFlagChange] = useState(true)
   const [posteo, setPosteo] = useState([])
   const [postRanking, setPostRanking] = useState([])
+  const [imgUpload, setImgUpload] = useState([])
 
   useEffect(() => {
     async function fetchPost() {
@@ -31,7 +29,7 @@ export default function General() {
     }
     fetchPost();
 
-  }, [])
+  }, [flagChange])
 
 
   const refreshPost = async () => {
@@ -97,15 +95,12 @@ export default function General() {
 
   }
 
-
+ 
 
   const navigate = (url) => {
     push(url);
   }
 
-  const addPost = (post) => {
-    console.log(post)
-  }
 
   const onSubmit = async (event) => {
 
@@ -127,6 +122,7 @@ export default function General() {
             resolve(response);
             console.log(response.data)
             posteo.unshift(response.data.post)
+            setFlagChange(!flagChange)
           }).catch(error => {
             if (error.response.status === 401) {
               resolve(error.response.status)
@@ -145,13 +141,22 @@ export default function General() {
 
 
 
+  
 
   return (
     <Layout position="general">
       <form onSubmit={handleSubmit(onSubmit)} id="commitPost">
         <div className='flex font-bold  text-[#ffff] pb-[16px] pt-[16px]  border-solid border-[1px] border-[gray] '>
+        
+          <label className='cursor-pointer text-[white]'>
           <BsCamera className='w-[40px] h-[40px] cursor-pointer ml-[24px]' />
-
+        <input
+        type="file"
+        id="inputFileToLoad"
+        className=' hidden'
+        onChange={() => getFiles(event.target)}
+       />
+        </label>
           <input
             {...register("post", {
               required: { value: true, message: "* Campo Requerido" },
@@ -168,13 +173,15 @@ export default function General() {
           <div className="flex ml-[8px] mr-[16px] ">
             <div className='self-center font-bold  text-[#ffff]  mr-[8px]'>{'@' + JSON.parse(localStorage.getItem('currentUser')).username}</div>
             <div className='w-[40px] h-[40px]'>
-              <Image src="/perfil-example.jpg" alt="profile" height={40} width={40} className="rounded-full w-[40px] h-[40px]" />
+              <Image src={JSON.parse(localStorage.getItem('currentUser')).imgAvatarBase64} alt="profile" height={40} width={40} className="rounded-full w-[40px] h-[40px]" />
             </div>
           </div>
         </div>
-
+    
+   
       </form>
  
+
       <div className=' border-solid border-[1px] border-[gray] h-full'>
         <div className='font-bold text-[32px] text-[#ffff] ml-[48px] mt-[27px] mb-[27px]'>
           MOST RECENT
