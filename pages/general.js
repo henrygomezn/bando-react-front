@@ -13,7 +13,10 @@ import { RiSendPlaneFill } from 'react-icons/ri';
 export default function General() {
 
   const router = useRouter();
+
   const { push } = router;
+
+
   const [loading, setLoading] = useState(true);
   const { register, handleSubmit, formState: { errors }, clearErrors, reset } = useForm();
   const [saveForm, setSaveForm] = useState(true)
@@ -123,6 +126,7 @@ export default function General() {
             console.log(response.data)
             posteo.unshift(response.data.post)
             setFlagChange(!flagChange)
+            alert("add post successfully")
           }).catch(error => {
             if (error.response.status === 401) {
               resolve(error.response.status)
