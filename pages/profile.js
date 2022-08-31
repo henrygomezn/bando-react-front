@@ -3,7 +3,7 @@ import Layout from '../components/Layout/Layout'
 import Image from 'next/image';
 import axios from 'axios';
 import { useState } from 'react';
-import { Bars } from 'react-loader-spinner';
+
 import { BsCamera, BsGraphUp } from 'react-icons/bs';
 import { IoImagesOutline } from 'react-icons/io5';
 

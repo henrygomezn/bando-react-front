@@ -10,7 +10,7 @@ import ModalNewUser from '../components/Permission/ModalNewUser';
 import ModalNewRol from '../components/Permission/ModalNewRol';
 import ModalUserRol from '../components/Permission/ModalUserRol';
 import axios from "axios";
-import { Bars } from 'react-loader-spinner';
+
 import { BsCheck } from 'react-icons/bs'
 import { IoClose } from 'react-icons/io5'
 
@@ -218,7 +218,7 @@ const permission = () => {
 
             {loading &&
                 <div className='flex justify-center items-center align mt-[24px]'>
-                    <Bars color="#004466" className="mr-[auto] ml-[auto]" height={80} width={80} />
+                
                 </div>
             }
 

@@ -2,7 +2,7 @@ import Layout from '../../components/Layout/Layout'
 import Image from 'next/image';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { Bars } from 'react-loader-spinner';
+
 import { useForm } from 'react-hook-form'
 import { AiFillLike } from 'react-icons/ai';
 import { MdModeComment } from 'react-icons/md';

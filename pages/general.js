@@ -347,7 +347,7 @@ export default function General() {
 
           { // loading &&
             //   <div className='flex justify-center mt-[24px]'>
-            //    <Bars color="#004466" height={80} width={80} />
+            //   
             // </div>
           }
         </div>
