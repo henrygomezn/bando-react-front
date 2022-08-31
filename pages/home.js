@@ -60,10 +60,12 @@ export default function home() {
                         alert("Sign in successfully!")
                         navigate("/general")
                     }).catch(error => {
-                        if (error.response.status === 401) {
-                            resolve(error.response.status)
+                        if(error){
+                            alert("bad credentials")
+                   
+                            window.location.reload()
                         }
-                        resolve(error);
+                         
                     })
             });
 
@@ -148,6 +150,11 @@ export default function home() {
 
 
                                     </div>
+                                
+
+                                    </form>
+                          
+
                                     <label className='text-black text-sm flex flex-col mt-[1rem]'>
                                     <div className='text-black ml-[auto] mr-[auto] font-bold mt-[1rem] '>Forgot password?</div>
                                     <div className='text-black ml-[auto] mr-[auto] font-bold mt-[1rem] '>New Member?</div>
@@ -160,11 +167,6 @@ export default function home() {
                                         </div>
                                     </button>
                                     </label>
-
-                                    </form>
-                          
-
-
 
 
                             </div>

@@ -109,13 +109,20 @@ export default function Comment() {
             {selectComment &&
                 <div className='flex justify-center mt-[24px] ml-[8px]'>
                     <div className='w-[40px] h-[40px]'>
-                        <Image src="/perfil-example.jpg" alt="profile" width={40} height={40} className=" rounded-full" />
+                    {selectComment.imgAvatar ? <Image src={selectComment.imgAvatar} alt="profile" width={40} height={40} className=" rounded-full" /> : <Image src="/perfil-example.jpg" alt="profile" width={40} height={40} className=" rounded-full" />}
                     </div>
 
                     <div className='bg-[white] rounded-[16px] mb-[11px] leading-[18px] tracking-[-2%] ml-[8px] w-[90%] pt-[8px]  mr-[16px]'>
 
                         <div className=' mx-[16px] text-[24px] self-center  text-[#1BE56C]'>{'@' + selectComment.username}</div>
                         <div className=' mx-[16px] text-[16px] mt-[8px] self-center '>{selectComment.content}</div>
+
+                        {selectComment.imgContent &&
+                        <div className='flex'>
+                          <img src={selectComment.imgContent} className="ml-auto mr-auto mt-[8px]" width={200} height={200}/>
+                        </div>
+
+                      }
 
                         <div className='flex mt-[1rem] mb-[1rem]'>
 

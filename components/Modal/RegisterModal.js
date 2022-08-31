@@ -14,12 +14,47 @@ const RegisterModal = (props) => {
     const { register, handleSubmit, formState: { errors }, clearErrors, reset } = useForm();
     const [active, setActive] = useState(false)
     const [saveForm, setSaveForm] = useState(true)
+    const [activeValidation, setActiveValidation] = useState(false)
+    const [showError, setShowError] = useState(true)
     const { push } = useRouter();
 
     const closeModal = () => {
-        reset({ username: "", password: "", email: "", password2:"", code: "" });
+        reset({ username: "", password: "", email: "", password2: "", code: "" });
+        setActiveValidation(false)
         clearErrors()
         onClose();
+    }
+
+
+    const verifyCode = async () => {
+
+        const code = document.getElementsByName("code")[0].value;
+
+
+        const searchCode = await new Promise((resolve, reject) => {
+            axios.get('http://localhost:8080/api/referalCode/' + code)
+                .then(response => {
+                    resolve(response);
+                    console.log(response.data)
+
+                    if (response.data.length > 0) {
+
+                        setShowError(false)
+                    } else {
+                        setShowError(true)
+                    }
+
+                }).catch(error => {
+
+                    if (error.response.status === 401) {
+                        resolve(error.response.status)
+                    }
+                    resolve(error);
+                })
+        });
+
+        setActiveValidation(true)
+        console.log(code)
     }
 
     const handleCallback = (childData) => {
@@ -40,13 +75,13 @@ const RegisterModal = (props) => {
             const confirmPassword = event.password2;
 
 
-             console.log(username)
-             console.log(email)
+            console.log(username)
+            console.log(email)
             const data = {
                 username: username,
                 email: email,
                 password: password,
-                roles: ["user","admin"]
+                roles: ["user", "admin"]
 
             }
 
@@ -56,7 +91,7 @@ const RegisterModal = (props) => {
                         resolve(response);
                         console.log(response.data)
                         alert("User was registered successfully!")
-                        closeModal()             
+                        closeModal()
                     }).catch(error => {
                         if (error.response.status === 401) {
                             resolve(error.response.status)
@@ -111,28 +146,39 @@ const RegisterModal = (props) => {
                                         </div>
                                     </div>
                                     <div className="ml-[auto] mr-[auto]">
-                                        <Dialog.Title as="h3" className="text-[32px] font-bold leading-[42px] text-black tracking-[-3%] whitespace-nowrap mb-[19px] ">
+                                        <Dialog.Title as="h3" className="text-[28px] font-bold leading-[42px] text-black tracking-[-3%] whitespace-nowrap mb-[19px] ">
                                             REGISTER
                                         </Dialog.Title>
                                     </div>
                                 </div>
                             </div>
 
-
-                            <div className="h-[360px]">
+                            <form onSubmit={handleSubmit(onSubmit)} id="registerUser">
+                            <div className="h-[400px] overflow-y-scroll gt-scroll ">
 
                                 {/*Contenido*/}
 
 
-                                <form onSubmit={handleSubmit(onSubmit)} id="registerUser">
+                             
                                     <div className='mb-[8px] ml-[24px] font-bold leading-[19.07px] tracking-[-5%] text-[14px]'>REFERAL CODE</div>
-                                    <input
-                                        {...register("code", {
-                                            required: { value: true, message: "* Campo Requerido" },
-                                        })} name='code'
-                                        type="text"
-                                        className="ml-[24px] mb-[8px] border-[2px] border-[#EDEDED] rounded-full w-[279px] h-[48px] pl-[16px] focus:outline-none focus-visible:ring-1 focus-visible:ring-white"
-                                        autoComplete='off' />
+                                    <div className='flex'>
+                                        <input
+                                            {...register("code", {
+                                                required: { value: true, message: "* Campo Requerido" },
+                                            })} name='code'
+                                            type="text"
+                                            className="ml-[24px] mb-[8px] border-[2px] border-[#EDEDED] rounded-l-[8px] w-[279px] h-[48px] pl-[16px] focus:outline-none focus-visible:ring-1 focus-visible:ring-white"
+                                            autoComplete='off' />
+                                        <div className='bg-[#000000e1] rounded-r-[8px] mr-[8px] h-[48px] pl-[8px] pr-[8px] flex items-center focus:outline-none focus-visible:ring-1 focus-visible:ring-white' onClick={() => verifyCode()}>
+                                            <div className='text-[white]'>CHECK</div>
+                                        </div>
+
+
+
+                                    </div>
+                                    {activeValidation ? showError ? <div className='ml-[24px] text-[red]'> ** Invalide code</div> :
+                                        <div className='ml-[24px] text-[white] text-sm'> ✓✓ Codigo Valido</div>
+                                        : null}
 
                                     <div className='mb-[8px] ml-[24px] font-bold leading-[19.07px] tracking-[-5%] text-[14px]'>USERNAME</div>
                                     <input
@@ -166,26 +212,29 @@ const RegisterModal = (props) => {
                                         type="password"
                                         className="ml-[24px] mb-[8px] border-[2px] border-[#EDEDED] rounded-full w-[279px] h-[48px] pl-[16px] focus:outline-none focus-visible:ring-1 focus-visible:ring-white"
                                         autoComplete='off' />
-                                    <div className='flex mt-[20px]'>
-
-                                        <button type="submit"
-                                            className="h-[48px] w-[135px] bg-[#000000] rounded-full font-bold text-[16px] leading-[22px] tracking-[-1px] ml-[auto] mr-[auto] pl-[16px] pr-[16px]">
-                                            <div className='flex '>
-
-                                                <div className='text-white ml-[auto] mr-[auto] font-bold '>CREATE ACCOUNT</div>
-                                            </div>
-                                        </button>
 
 
-                                    </div>
-                             
-                                </form>
-
+                              
 
 
 
 
                             </div>
+
+                            <div className='flex mt-[20px]'>
+
+                                <button type="submit" disabled={showError}
+                                    className="h-[48px] w-[135px] bg-[#000000] rounded-full font-bold text-[16px] 
+    leading-[22px] tracking-[-1px] ml-[auto] mr-[auto] pl-[16px] pr-[16px] disabled:opacity-50">
+                                    <div className='flex '>
+
+                                        <div className='text-white ml-[auto] mr-[auto] font-bold '>CREATE ACCOUNT</div>
+                                    </div>
+                                </button>
+
+
+                            </div>
+                            </form>
 
                         </div>
                     </Transition.Child>

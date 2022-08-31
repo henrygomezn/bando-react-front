@@ -38,7 +38,7 @@ export default function Profile() {
     return (
 
         <Layout refreshDate='' selected="bg-[#F3F3F3]" position="profile">
-
+         <div className='overflow-y-scroll h-[90vh]'>
             <div class="flex border-solid border-[1px] border-[gray] pt-[1rem]">
                 <div class="flex w-[160px]  h-20 text-[white]">
 
@@ -50,9 +50,9 @@ export default function Profile() {
                         </div>
                     </div>
 
-                    <div className='ml-[8px]'>
-                        <div className='  font-bold  text-[#ffff]  mr-[8px]'>{'@' + JSON.parse(localStorage.getItem('currentUser')).username}</div>
-                        <div className='font-bold  text-[#ffff]  mr-[8px]'>@IOS</div>
+                    <div className=' ml-[8px]'>
+                        <div className=' font-bold  text-[#ffff]  mr-[8px]'>{'@' + JSON.parse(localStorage.getItem('currentUser')).username}</div>
+                        
 
                     </div>
 
@@ -61,7 +61,7 @@ export default function Profile() {
 
                 </div>
                 <div class="grow h-20 ">
-                    02
+                    
                 </div>
                 <div class="flex-none w-14 h-20 text-[white]">
                     <BsCamera className='w-[40px] h-[40px] cursor-pointer' />
@@ -90,6 +90,13 @@ export default function Profile() {
                                     <div className='ml-[auto] mr-[8px] text-[16px] text-[gray]'>{formatDate(new Date(item.createDate))}</div>
                                 </div>
                                 <div className=' mx-[16px] text-[16px] mt-[8px] self-center '>{item.content}</div>
+
+                                {item.imgContent &&
+                        <div className='flex'>
+                          <img src={item.imgContent} className="ml-auto mr-auto mt-[8px]" width={200} height={200}/>
+                        </div>
+
+                      }
 
                                 <div className='flex mt-[1rem]'>
 
@@ -147,7 +154,7 @@ export default function Profile() {
 
 
 
-
+            </div>
         </Layout>
 
     )

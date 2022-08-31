@@ -110,11 +110,46 @@ const Layout = (props) => {
       }
 
 
+      const sendCode = async () => {
+
+        const sendMail = document.getElementsByName("sendMail")[0].value;
+
+        const data = 
+        {
+            service_id:"service_6g86x46",
+            template_id:"template_qk3pxlj",
+            user_id:"oxEIe97JgqUewTO4w",
+                template_params: {
+                para: sendMail,
+                username: JSON.parse(localStorage.getItem('currentUser')).username,
+                referal_code : JSON.parse(localStorage.getItem('currentUser')).referalCode
+            }
+
+        }
+
+
+        const send = await new Promise((resolve, reject) => {
+            axios.post('https://api.emailjs.com/api/v1.0/email/send',data)
+                .then(response => {
+                    resolve(response);
+                    console.log(response.data)
+                    alert("Send email Succesfully")
+
+                }).catch(error => {
+
+                   
+                })
+        });
+
+      
+    }
+
+
     return (
         <div className='bg-[black]  min-h-screen'>
             {/*NavBar*/}
-            <div className="bg-[#1BE56C] bg-cover h-[80px] flex flex-inline">
-                <div className="flex justify-start ml-[24px]">
+            <div className="bg-[#1BE56C] bg-cover h-[10vh] flex flex-inline">
+                <div className="flex justify-start ">
                     <Image src="/bando-logo.png" className='cursor-pointer' alt="Bando logo" width={80} height={60} onClick={() => { navigate("/general") }} />
                 </div>
 
@@ -148,7 +183,7 @@ const Layout = (props) => {
                                
 
 
-                                        <div className='ml-[24px] font-bold' >{'@' + JSON.parse(localStorage.getItem('currentUser')).username}</div>
+                                        <div className='ml-[24px] font-bold mt-[16px] text-xl' >{'@' + JSON.parse(localStorage.getItem('currentUser')).username}</div>
                                     </div>
 
                                 </div>
@@ -188,7 +223,17 @@ const Layout = (props) => {
                                                 <div className="ml-[2rem] mt-[1.188rem] font-semibold text-[1rem] 
                                 bg-black text-white pl-[16px] pr-[16px] rounded-[16px] ">
                                                     {JSON.parse(localStorage.getItem('currentUser')).referalCode} </div>
+                                                   
                                             </div>
+                                            <input
+                                            name='sendMail'
+                                            type="text"
+                                            placeholder='  example@example.com'
+                                            className="ml-[24px] mb-[8px] text-xs mt-[8px] border-[2px] border-[#dbdbdb] rounded-l-[8px] w-[200px] h-[32px]  focus:outline-none focus-visible:ring-1 focus-visible:ring-white"
+                                            autoComplete='off' />
+                                            <div className='ml-[2rem] bg-[#1BE56C] w-fit p-[8px] rounded-md'> 
+                                               <div className=' ml-auto mr-auto text-black font-bold' onClick={() => sendCode()}>SEND </div>
+                                              </div>
                                         </div>
                                     }
                                 </div>
