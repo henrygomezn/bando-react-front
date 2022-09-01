@@ -51,7 +51,7 @@ export default function home() {
 
 
             const accessLogin = await new Promise((resolve, reject) => {
-                axios.post('http://localhost:8080/api/auth/signin', data)
+                axios.post('https://bando-back.herokuapp.com/api/auth/signin', data)
                     .then(response => {
                         resolve(response);
                         console.log(response)
