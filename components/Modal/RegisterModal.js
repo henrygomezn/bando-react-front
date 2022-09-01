@@ -32,7 +32,7 @@ const RegisterModal = (props) => {
 
 
         const searchCode = await new Promise((resolve, reject) => {
-            axios.get(process.env.REACT_APP_API+'api/referalCode/' + code)
+            axios.get(process.env.REACT_APP_API_URL+'api/referalCode/' + code)
                 .then(response => {
                     resolve(response);
                     console.log(response.data)
@@ -86,7 +86,7 @@ const RegisterModal = (props) => {
             }
 
             const createPost = await new Promise((resolve, reject) => {
-                axios.post(process.env.REACT_APP_API+'api/auth/signup', data)
+                axios.post(process.env.REACT_APP_API_URL+'api/auth/signup', data)
                     .then(response => {
                         resolve(response);
                         console.log(response.data)

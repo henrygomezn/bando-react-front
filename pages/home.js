@@ -52,7 +52,7 @@ export default function home() {
 
 
             const accessLogin = await new Promise((resolve, reject) => {
-                axios.post(process.env.REACT_APP_API+'api/auth/signin', data)
+                axios.post(process.env.REACT_APP_API_URL+'api/auth/signin', data)
                     .then(response => {
                         resolve(response);
                         console.log(response)
