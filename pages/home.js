@@ -8,6 +8,7 @@ import { BsCheck } from 'react-icons/bs'
 import { Dialog, Transition } from '@headlessui/react'
 import { useForm } from 'react-hook-form'
 
+
 import axios from "axios";
 import { useRouter } from "next/router";
 
@@ -51,7 +52,7 @@ export default function home() {
 
 
             const accessLogin = await new Promise((resolve, reject) => {
-                axios.post('https://bando-back.herokuapp.com/api/auth/signin', data)
+                axios.post(process.env.REACT_APP_API+'api/auth/signin', data)
                     .then(response => {
                         resolve(response);
                         console.log(response)
