@@ -40,14 +40,14 @@ export default function General() {
     setLoading(true);
 
     const response = await new Promise((resolve, reject) => {
-      axios.get('http://localhost:8080/api/lastPost',)
+      axios.get(process.env.REACT_APP_API_URL+'api/lastPost',)
         .then(async (response) => {
           resolve(response.data);
           console.log(response.data)
           setPosteo(response.data)
 
           const detailsUserResponse = await new Promise((resolve, reject) => {  // save userDetails in localStorage
-            axios.get('http://localhost:8080/api/userDetails/' + JSON.parse(localStorage.getItem('user_id')))
+            axios.get(process.env.REACT_APP_API_URL+'api/userDetails/' + JSON.parse(localStorage.getItem('user_id')))
               .then(responseDetails => {
                 resolve(responseDetails.data);
                 console.log(responseDetails.data)
@@ -80,7 +80,7 @@ export default function General() {
     setLoading(true);
 
     const response = await new Promise((resolve, reject) => {
-      axios.get('http://localhost:8080/api/postRanking')
+      axios.get(process.env.REACT_APP_API_URL+'api/postRanking')
         .then(response => {
           resolve(response.data);
           console.log(response.data)
@@ -132,7 +132,7 @@ export default function General() {
           }
 
           const createPost = await new Promise((resolve, reject) => {
-            axios.post('http://localhost:8080/api/post', data)
+            axios.post(process.env.REACT_APP_API_URL+'api/post', data)
               .then(response => {
                 resolve(response);
                 console.log(response.data)
@@ -163,7 +163,7 @@ export default function General() {
         }
 
         const createPost = await new Promise((resolve, reject) => {
-          axios.post('http://localhost:8080/api/post', data)
+          axios.post(process.env.REACT_APP_API_URL+'api/post', data)
             .then(response => {
               resolve(response);
               console.log(response.data)
@@ -199,7 +199,7 @@ export default function General() {
     console.log(id)
 
     const response = await new Promise((resolve, reject) => {
-        axios.put('http://localhost:8080/api/postLike/'+ id)
+        axios.put(process.env.REACT_APP_API_URL+'api/postLike/'+ id)
             .then(response => {
                 console.log(response.data)
                 let post = posteo.find(item => item._id = id)

@@ -35,7 +35,7 @@ export default function Profiles() {
         setLoading(true);
 
         const response = await new Promise((resolve, reject) => {
-            axios.get('http://localhost:8080/api/userDetails/' + id)
+            axios.get(process.env.REACT_APP_API_URL+'api/userDetails/' + id)
                 .then(response => {
                     resolve(response.data);
                     console.log(response.data)
@@ -59,7 +59,7 @@ export default function Profiles() {
         console.log(id)
 
         const response = await new Promise((resolve, reject) => {
-            axios.put('http://localhost:8080/api/postLike/'+ id)
+            axios.put(process.env.REACT_APP_API_URL+'api/postLike/'+ id)
                 .then(response => {
                     console.log(response.data)
                     let post = dataPost.find(item => item._id = id)
@@ -87,7 +87,7 @@ export default function Profiles() {
         setLoading(true);
 
         const response = await new Promise((resolve, reject) => {
-            axios.get('http://localhost:8080/api/userPost/' + id)
+            axios.get(process.env.REACT_APP_API_URL+'api/userPost/' + id)
                 .then(response => {
                     resolve(response.data);
                     console.log(response.data)

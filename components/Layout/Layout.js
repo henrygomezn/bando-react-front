@@ -68,7 +68,7 @@ const Layout = (props) => {
 
     
           const changeImgAvatar = await new Promise((resolve, reject) => {
-            axios.put('http://localhost:8080/api/imgAvatarChange/' + JSON.parse(localStorage.getItem('currentUser')).userId, { imgAvatarBase64: imgUrl})
+            axios.put(process.env.REACT_APP_API_URL + 'api/imgAvatarChange/' + JSON.parse(localStorage.getItem('currentUser')).userId, { imgAvatarBase64: imgUrl})
               .then(response => {
                 resolve(response);
                 console.log(response.data)
@@ -96,7 +96,7 @@ const Layout = (props) => {
     
 
               const detailsUserResponse = await new Promise((resolve, reject) => {  // save userDetails in localStorage
-                axios.get('http://localhost:8080/api/userDetails/' + JSON.parse(localStorage.getItem('user_id')))
+                axios.get(process.env.REACT_APP_API_URL+'api/userDetails/' + JSON.parse(localStorage.getItem('user_id')))
                   .then(responseDetails => {
                     resolve(responseDetails.data);
                     localStorage.setItem('currentUser', JSON.stringify(responseDetails.data))

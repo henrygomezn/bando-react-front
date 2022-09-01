@@ -37,7 +37,7 @@ export default function SearchPage() {
 
     
         const response = await new Promise((resolve, reject) => {
-          axios.post('http://localhost:8080/api/userSearch',data)
+          axios.post(process.env.REACT_APP_API_URL+'api/userSearch',data)
             .then(response => {
               resolve(response.data);
               console.log(response.data)

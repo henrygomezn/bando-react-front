@@ -39,7 +39,7 @@ export default function Comment() {
         setLoading(true);
 
         const response = await new Promise((resolve, reject) => {
-            axios.get('http://localhost:8080/api/post/' + id)
+            axios.get(process.env.REACT_APP_API_URL+'api/post/' + id)
                 .then(response => {
                     resolve(response.data);
                     console.log(response.data)
@@ -76,7 +76,7 @@ export default function Comment() {
 
 
             const createPost = await new Promise((resolve, reject) => {
-                axios.post('http://localhost:8080/api/comment', dataComment)
+                axios.post(process.env.REACT_APP_API_URL+'api/comment', dataComment)
                     .then(response => {
                         resolve(response);
                         console.log(response.data.comment)
