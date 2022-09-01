@@ -38,7 +38,7 @@ export default function Profile() {
     return (
 
         <Layout refreshDate='' selected="bg-[#F3F3F3]" position="profile">
-         <div className='overflow-y-scroll h-[90vh]'>
+       {typeof window == 'undefined' ? null :  <div className='overflow-y-scroll h-[90vh]'>
             <div class="flex border-solid border-[1px] border-[gray] pt-[1rem]">
                 <div class="flex w-[160px]  h-20 text-[white]">
 
@@ -162,7 +162,7 @@ export default function Profile() {
 
 
 
-            </div>
+            </div>} 
         </Layout>
 
     )
