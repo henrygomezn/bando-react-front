@@ -9,6 +9,8 @@ import { GoGraph } from 'react-icons/go';
 import { useRouter } from "next/router";
 import { BsCamera } from 'react-icons/bs';
 import axios from 'axios';
+
+
 const Layout = (props) => {
 
     const { children, refreshDate, refreshText, selected, position } = props;
@@ -178,7 +180,12 @@ const Layout = (props) => {
                                             />
                                         </label>
 
-                                        <img src={JSON.parse(localStorage.getItem('currentUser')).imgAvatarBase64} className="rounded-full" width={150} height={150} />
+                                        <img src={
+                                            JSON.parse(localStorage.getItem('currentUser')).imgAvatarBase64=="" ? 
+                                        "https://i.ibb.co/WkrMKBJ/default-img.jpg" :
+                                         JSON.parse(localStorage.getItem('currentUser')).imgAvatarBase64
+                                      }
+                                         className="rounded-full" width={150} height={150} />
 
                                
 

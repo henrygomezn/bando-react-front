@@ -52,7 +52,7 @@ export default function General() {
                 resolve(responseDetails.data);
                 console.log(responseDetails.data)
                 localStorage.setItem('currentUser', JSON.stringify(responseDetails.data))
-                setLoading(false);
+            //    setLoading(false);
               }).catch(error => {
                 if (error.response.status === 401) {
                   resolve(error.response.status)
@@ -249,7 +249,12 @@ export default function General() {
             <div className="flex ml-[8px] mr-[16px] ">
               <div className='self-center font-bold  text-[#ffff]  mr-[8px]'>{'@' + JSON.parse(localStorage.getItem('currentUser')).username}</div>
               <div className='w-[40px] h-[40px]'>
-                <Image src={JSON.parse(localStorage.getItem('currentUser')).imgAvatarBase64} alt="profile" height={40} width={40} className="rounded-full w-[40px] h-[40px]" />
+                <img src={
+                                            JSON.parse(localStorage.getItem('currentUser')).imgAvatarBase64=="" ? 
+                                        "https://i.ibb.co/WkrMKBJ/default-img.jpg" :
+                                         JSON.parse(localStorage.getItem('currentUser')).imgAvatarBase64
+                                      }
+                   alt="profile" height={40} width={40} className="rounded-full w-[40px] h-[40px]" />
               </div>
             </div>
           </div>
